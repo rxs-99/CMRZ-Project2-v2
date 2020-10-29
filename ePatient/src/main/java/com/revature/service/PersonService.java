@@ -3,16 +3,16 @@ package com.revature.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.dao.PatientDAO;
+import com.revature.dao.PersonDAO;
 import com.revature.model.Person;
 import com.revature.model.Prescription;
 
 @Service("patientService")
-public class PatientService {
-	private PatientDAO pdao;
+public class PersonService {
+	private PersonDAO pdao;
 	
 	@Autowired
-	public PatientService(PatientDAO pdao) {
+	public PersonService(PersonDAO pdao) {
 		this.pdao = pdao;
 	}
 	

@@ -6,7 +6,7 @@ import com.revature.model.Person;
 import com.revature.model.Prescription;
 
 @Repository("PatientDAOImpl")
-public class PatientDAOImpl implements PatientDAO {
+public class PersonDAOImpl implements PersonDAO {
 
 	@Override
 	public boolean createRefillRequest(int patientId, int perscriptionId) {
