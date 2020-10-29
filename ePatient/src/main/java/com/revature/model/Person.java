@@ -14,22 +14,21 @@ import javax.persistence.Table;
 public class Person {
 	
 	@Id
-	@Column(name = "personid")
-    @GeneratedValue(generator = "person_personid_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(allocationSize = 1, name = "person_personid_seq", sequenceName = "person_personid_seq")
+    @Column(name = "personid")
+    @GeneratedValue(generator = "person_id_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(allocationSize = 1, name = "person_id_seq", sequenceName = "person_id_seq")
     private int id;
-	
-	@Column
+
+    @Column(nullable = false)
     private String name;
-	
-	@Column
+
+    @Column(nullable = false)
     private String phone;
-	
-	@Column
+
+    @Column(nullable = false, unique = true)
     private String email;
     
     public Person() {
-		super();
 	}
 
 	public Person(int id, String name, String phone, String email) {

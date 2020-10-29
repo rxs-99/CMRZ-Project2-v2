@@ -15,16 +15,16 @@ import javax.persistence.Table;
 @Table(name = "authtable")
 public class LoginEntry {
 
-	@OneToOne(targetEntity = Person.class)
-	@JoinColumn(name = "personid")
-	private Person person;
-	
 	@Id
-	@Column
-	private String username;
-	
-	@Column
-	private String password;
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @OneToOne
+    @JoinColumn(name = "personid", nullable = false, unique = true)
+    private Person person;
 
 	public LoginEntry() {
 		super();

@@ -67,9 +67,9 @@ public class HibernateSessionFactory {
 			*/
 
 			sessionFactory = new Configuration().configure()
-					.setProperty("hibernate.connection.url", "jdbc:postgresql://epatient.cku8xrcflipx.us-west-2.rds.amazonaws.com/"/*auth.getProperty("url")*/)
+					.setProperty("hibernate.connection.url", "jdbc:postgresql://revature.cfoumzokvjgu.us-east-2.rds.amazonaws.com/revature"/*auth.getProperty("url")*/)
 					.setProperty("hibernate.connection.username", "postgres"/*auth.getProperty("user")*/)
-					.setProperty("hibernate.connection.password", "*CMRZ3334"/*auth.getProperty("password")*/)
+					.setProperty("hibernate.connection.password", "KB[v&p\\f-*23j]7T"/*auth.getProperty("password")*/)
 					.buildSessionFactory();
 		}
 		return sessionFactory.getCurrentSession();
