@@ -15,22 +15,80 @@ import com.revature.utility.HibernateSessionFactory;
 
 @Repository("PatientDAOImpl")
 public class PersonDAOImpl implements PersonDAO {
+	
 	@Override
 	public boolean isPatient(int personId) {
-		// TODO Auto-generated method stub
-		return false;
+		Session sess = HibernateSessionFactory.getSession();
+		Transaction tx = sess.beginTransaction();
+		
+		try {
+			CriteriaBuilder cb = sess.getCriteriaBuilder();
+			CriteriaQuery<Person> cq = cb.createQuery(Person.class);
+			Root<Person> root = cq.from(Person.class);
+			
+			cq.select(root);
+			cq.where(cb.equal(root.get("id"), personId));
+			Query<Person> q = sess.createQuery(cq);
+			
+			Person p = q.getSingleResult();
+			tx.commit();
+			return p.getPosition().getName().equals("patient");
+		} catch(HibernateException he) {
+			tx.rollback();
+			return false;
+		} finally {
+			sess.close();
+		}
 	}
 
 	@Override
 	public boolean isNurse(int personId) {
-		// TODO Auto-generated method stub
-		return false;
+		Session sess = HibernateSessionFactory.getSession();
+		Transaction tx = sess.beginTransaction();
+		
+		try {
+			CriteriaBuilder cb = sess.getCriteriaBuilder();
+			CriteriaQuery<Person> cq = cb.createQuery(Person.class);
+			Root<Person> root = cq.from(Person.class);
+			
+			cq.select(root);
+			cq.where(cb.equal(root.get("id"), personId));
+			Query<Person> q = sess.createQuery(cq);
+			
+			Person p = q.getSingleResult();
+			tx.commit();
+			return p.getPosition().getName().equals("nurse");
+		} catch(HibernateException he) {
+			tx.rollback();
+			return false;
+		} finally {
+			sess.close();
+		}
 	}
 
 	@Override
 	public boolean isDoctor(int personId) {
-		// TODO Auto-generated method stub
-		return false;
+		Session sess = HibernateSessionFactory.getSession();
+		Transaction tx = sess.beginTransaction();
+		
+		try {
+			CriteriaBuilder cb = sess.getCriteriaBuilder();
+			CriteriaQuery<Person> cq = cb.createQuery(Person.class);
+			Root<Person> root = cq.from(Person.class);
+			
+			cq.select(root);
+			cq.where(cb.equal(root.get("id"), personId));
+			Query<Person> q = sess.createQuery(cq);
+			
+			Person p = q.getSingleResult();
+			tx.commit();
+			return p.getPosition().getName().equals("doctor");
+		} catch(HibernateException he) {
+			tx.rollback();
+			return false;
+		} finally {
+			sess.close();
+		}
 	}
 	
 	@Override

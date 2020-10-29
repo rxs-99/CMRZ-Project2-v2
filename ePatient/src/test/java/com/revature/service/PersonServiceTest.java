@@ -11,9 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.revature.dao.PersonDAO;
-import com.revature.model.Appointment;
 import com.revature.model.Person;
-import com.revature.model.Prescription;
 
 class PersonServiceTest {
 	
@@ -27,27 +25,17 @@ class PersonServiceTest {
 		1,
 		"Test Patient",
 		"555-555-5555",
-		"patient@email.com"
+		"patient@email.com",
+		null
 	);
 	
 	public static Person testDoctor = new Person(
 		2,
 		"Test Doctor",
 		"777-777-7777",
-		"doctor@email.com"
+		"doctor@email.com",
+		null
 	);
-	
-	public static Appointment testAppt = new Appointment(
-		1,
-		testPatient,
-		testDoctor,
-		null,
-		"Test comment.",
-		"Approved"
-	);
-	
-	// TODO fill once Prescription object class is filled.
-	public static Prescription testPrescription = new Prescription();
 	
 	@BeforeEach
 	void initPatientDAO() {
