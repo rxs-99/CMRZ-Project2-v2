@@ -58,7 +58,7 @@ public class HibernateSessionFactory {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
+			} 
 */
 			/*
 			System.out.println(auth.getProperty("url"));
