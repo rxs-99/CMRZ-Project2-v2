@@ -1,6 +1,7 @@
 package com.revature.utility;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,13 +17,27 @@ public class HibernateSessionFactory {
 
 	public static Session getSession() {
 		if (sessionFactory == null) {
-/**/
+			
+			String filePath = "connection.prop";
+			
+			File f = new File(filePath);
+			
+			if(!f.exists())
+			{
+				try {
+					f.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 			// property obj to hold our connection info
 			Properties auth = new Properties();
 
 			// read properties from file
 			FileReader fr = null;
-			String filePath = "/home/ec2-user/.auth/connection.prop";
+			
 
 			try {
 				fr = new FileReader(filePath);
@@ -59,17 +74,17 @@ public class HibernateSessionFactory {
 					e.printStackTrace();
 				}
 			} 
-/**/
+
 			
-			System.out.println(auth.getProperty("url"));
+			System.out.println();
 			System.out.println(auth.getProperty("user"));
 			System.out.println(auth.getProperty("password"));
 			
 
 			sessionFactory = new Configuration().configure()
-					.setProperty("hibernate.connection.url", /*"jdbc:postgresql://revature.cfoumzokvjgu.us-east-2.rds.amazonaws.com/revature"*//**/auth.getProperty("url")/**/)
-					.setProperty("hibernate.connection.username", /*"postgres"*//**/auth.getProperty("user")/**/)
-					.setProperty("hibernate.connection.password", /*"KB[v&p\\f-*23j]7T"*//**/auth.getProperty("password")/**/)
+					.setProperty("hibernate.connection.url", auth.getProperty("url"))
+					.setProperty("hibernate.connection.username", auth.getProperty("user"))
+					.setProperty("hibernate.connection.password", auth.getProperty("password"))
 					.buildSessionFactory();
 		}
 		return sessionFactory.getCurrentSession();
