@@ -1,10 +1,16 @@
 package com.revature.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.revature.model.Appointment;
 import com.revature.utility.HibernateSessionFactory;
@@ -101,14 +107,53 @@ public class AppointmentDAOImpl implements AppointmentDAO {
 
     @Override
     public List<Appointment> getAppointmentByStatus(String status) {
-        // TODO Auto-generated method stub
-        return null;
+		Session s = null;
+		Transaction tx = null;
+		List<Appointment> appointments = new ArrayList<Appointment>();
+
+		try {
+			s = HibernateSessionFactory.getSession();
+			tx = s.beginTransaction();
+
+			CriteriaBuilder cb = s.getCriteriaBuilder();
+			CriteriaQuery<Appointment> cq = cb.createQuery(Appointment.class);
+			Root<Appointment> root = cq.from(Appointment.class);
+			cq.select(root).where(cb.equal(root.get("status"), status));
+			Query<Appointment> q = s.createQuery(cq);
+
+			appointments = q.getResultList();
+			tx.commit();
+		} catch (HibernateException e){
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			s.close();
+		}
+
+        return appointments;
     }
 
     @Override
     public List<Appointment> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+        Session s = null;
+		Transaction tx = null;
+		List<Appointment> appointments = new ArrayList<Appointment>();
+
+		try{
+			s = HibernateSessionFactory.getSession();
+			tx = s.beginTransaction();
+
+			appointments = s.createQuery("FROM Appointment", Appointment.class).getResultList();
+
+			tx.commit();
+		} catch (HibernateException e){
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			s.close();
+		}
+
+		return appointments;
     }
     
 }
