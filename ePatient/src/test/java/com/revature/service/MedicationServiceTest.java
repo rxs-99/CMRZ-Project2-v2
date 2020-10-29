@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,7 +32,7 @@ public class MedicationServiceTest
 			new Medication(3, "Ibuprofen", "Advil", 7)
 		));
 
-	@BeforeEach
+	@Before
 	public void before() 
 	{
 		MockitoAnnotations.openMocks(this);

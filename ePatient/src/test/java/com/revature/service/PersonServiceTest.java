@@ -38,7 +38,7 @@ public class PersonServiceTest {
 	);
 	
 	@Before
-	void initPatientDAO() {
+	public void initPatientDAO() {
 		MockitoAnnotations.openMocks(this);
 	}
 	
