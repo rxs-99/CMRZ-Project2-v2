@@ -10,18 +10,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.revature.dao.PatientDAO;
+import com.revature.dao.PersonDAO;
 import com.revature.model.Appointment;
 import com.revature.model.Person;
 import com.revature.model.Prescription;
 
-class PatientServiceTest {
+class PersonServiceTest {
 	
 	@InjectMocks
-	public static PatientService ps;
+	public static PersonService ps;
 	
 	@Mock
-	public PatientDAO pdao;
+	public PersonDAO pdao;
 	
 	public static Person testPatient = new Person(
 		1,
@@ -53,21 +53,6 @@ class PatientServiceTest {
 	void initPatientDAO() {
 		MockitoAnnotations.openMocks(this);
 	}
-
-	@Test 
-	void testCreateAppointmentSuccess() {
-		int testPatientId = testPatient.getId();
-		Mockito.when(pdao.createAppointment(testPatientId, testAppt)).thenReturn(true);
-		
-		ps = new PatientService(pdao);
-		boolean success = ps.createAppointment(testPatientId, testAppt);
-		Assertions.assertEquals(true, success);
-	}
-	
-	@Test
-	void testCreateAppointmentFail() {
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	void testCreateRefillRequestSuccess() {
@@ -75,7 +60,7 @@ class PatientServiceTest {
 		int prescriptionId = 999;
 		Mockito.when(pdao.createRefillRequest(testPatientId, prescriptionId)).thenReturn(true);
 		
-		ps = new PatientService(pdao);
+		ps = new PersonService(pdao);
 		boolean success = ps.createRefillRequest(testPatientId, prescriptionId);
 		Assertions.assertEquals(true, success);
 	}
@@ -90,7 +75,7 @@ class PatientServiceTest {
 		int patientId = testPatient.getId();
 		Mockito.when(pdao.getPatientInfo(patientId)).thenReturn(testPatient);
 		
-		ps = new PatientService(pdao);
+		ps = new PersonService(pdao);
 		Person retrievedPatient = ps.getPatientInfo(patientId);
 		Assertions.assertEquals(testPatient, retrievedPatient);
 	}
@@ -101,21 +86,10 @@ class PatientServiceTest {
 	}
 	
 	@Test
-	void testGetAppointmentInfo() {
-		// TODO: When getters/setters are defined in Appt, replace this with getId().
-		int apptId = 1;
-		Mockito.when(pdao.getAppointmentInfo(apptId)).thenReturn(testAppt);
-		
-		ps = new PatientService(pdao);
-		Appointment retrievedAppointment = ps.getAppointmentInfo(apptId);
-		Assertions.assertEquals(testAppt, retrievedAppointment);
-	}
-	
-	@Test
 	void testUpdatePatientInfoSuccess() {
 		Mockito.when(pdao.updatePatientInfo(testPatient)).thenReturn(true);
 		
-		ps = new PatientService(pdao);
+		ps = new PersonService(pdao);
 		boolean success = ps.updatePatientInfo(testPatient);
 		Assertions.assertEquals(true, success);
 	}
