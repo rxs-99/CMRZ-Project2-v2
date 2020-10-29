@@ -20,6 +20,8 @@
 		<mapping class="com.revature.model.Medication"/>
 		<mapping class="com.revature.model.LoginEntry"/>
 		<mapping class="com.revature.model.Person"/>
+		<mapping class="com.revature.model.Appointment"/>
+		<mapping class="com.revature.model.Prescription"/>
 
 	</session-factory>
 </hibernate-configuration>
