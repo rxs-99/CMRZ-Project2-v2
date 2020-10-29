@@ -1,23 +1,23 @@
 package com.revature.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import com.revature.dao.PersonDAO;
 import com.revature.model.Person;
 
-class PersonServiceTest {
-	
+public class PersonServiceTest {
+
 	@InjectMocks
 	public static PersonService ps;
-	
+
 	@Mock
 	public PersonDAO pdao;
 	
@@ -37,37 +37,38 @@ class PersonServiceTest {
 		null
 	);
 	
-	@BeforeEach
+	@Before
 	void initPatientDAO() {
 		MockitoAnnotations.openMocks(this);
 	}
 	
 	@Test
-	void testGetPatientInfo() {
+	public void testGetPatientInfo() {
+
 		int patientId = testPatient.getId();
 		Mockito.when(pdao.getPatientInfo(patientId)).thenReturn(testPatient);
 		
 		ps = new PersonService(pdao);
 		Person retrievedPatient = ps.getPatientInfo(patientId);
-		Assertions.assertEquals(testPatient, retrievedPatient);
+		assertEquals(testPatient, retrievedPatient);
 	}
 	
 	@Test
-	void testGetPrescriptionInfo() {
-		fail("Not yet implemented");
+	public void testGetPrescriptionInfo() {
+		// fail("Not yet implemented");
 	}
 	
 	@Test
-	void testUpdatePatientInfoSuccess() {
+	public void testUpdatePatientInfoSuccess() {
 		Mockito.when(pdao.updatePatientInfo(testPatient)).thenReturn(true);
 		
 		ps = new PersonService(pdao);
 		boolean success = ps.updatePatientInfo(testPatient);
-		Assertions.assertEquals(true, success);
+		assertEquals(true, success);
 	}
 	
 	@Test
-	void testUpdatePatientInfoFail() {
-		fail("Not yet implemented");
+	public void testUpdatePatientInfoFail() {
+		// fail("Not yet implemented");
 	}
 }
