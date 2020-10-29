@@ -39,6 +39,10 @@ public class Appointment {
     @Column(name = "comment")
     private String comment;
 
+    public Appointment(){
+
+    }
+    
     public Appointment(int id, Person patient, Person doctor, Date date, String comment, String status) {
         this.id = id;
         this.patient = patient;
