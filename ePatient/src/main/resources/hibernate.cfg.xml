@@ -22,6 +22,7 @@
 		<mapping class="com.revature.model.Person"/>
 		<mapping class="com.revature.model.Appointment"/>
 		<mapping class="com.revature.model.Prescription"/>
+		<mapping class="com.revature.model.Position"/>
 
 	</session-factory>
 </hibernate-configuration>
