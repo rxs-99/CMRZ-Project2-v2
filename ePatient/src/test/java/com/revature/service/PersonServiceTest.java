@@ -55,22 +55,6 @@ class PersonServiceTest {
 	}
 	
 	@Test
-	void testCreateRefillRequestSuccess() {
-		int testPatientId = testPatient.getId();
-		int prescriptionId = 999;
-		Mockito.when(pdao.createRefillRequest(testPatientId, prescriptionId)).thenReturn(true);
-		
-		ps = new PersonService(pdao);
-		boolean success = ps.createRefillRequest(testPatientId, prescriptionId);
-		Assertions.assertEquals(true, success);
-	}
-	
-	@Test
-	void testCreateRefillRequestFail() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
 	void testGetPatientInfo() {
 		int patientId = testPatient.getId();
 		Mockito.when(pdao.getPatientInfo(patientId)).thenReturn(testPatient);

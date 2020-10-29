@@ -1,11 +1,12 @@
 package com.revature.service;
 
+import org.apache.commons.validator.routines.EmailValidator;
+import org.apache.commons.validator.routines.RegexValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.dao.PersonDAO;
 import com.revature.model.Person;
-import com.revature.model.Prescription;
 
 @Service("patientService")
 public class PersonService {
@@ -16,19 +17,53 @@ public class PersonService {
 		this.pdao = pdao;
 	}
 	
-	public boolean createRefillRequest(int patientId, int prescriptionId) {
-		return pdao.createRefillRequest(patientId, prescriptionId);
+	public boolean isPatient(int personId) {
+		return pdao.isPatient(personId);
+	}
+	
+	public boolean isNurse(int personId) {
+		return pdao.isNurse(personId);
+	}
+	
+	public boolean isDoctor(int personId) {
+		return pdao.isDoctor(personId);
+	}
+	
+	public boolean createPerson(Person p) {
+		if(isPersonValid(p)) {
+			return pdao.createPerson(p);
+		} else {
+			return false;
+		}	
 	}
 	
 	public Person getPatientInfo(int patientId) {
 		return pdao.getPatientInfo(patientId);
 	}
 	
-	public Prescription getPrescriptionInfo(int prescriptionId) {
-		return pdao.getPersciptionInfo(prescriptionId);
+	public boolean updatePatientInfo(Person newPatient) {
+		if(isPersonValid(newPatient)) {
+			return pdao.updatePatientInfo(newPatient);
+		} else {
+			return false;
+		}	
 	}
 	
-	public boolean updatePatientInfo(Person newPatient) {
-		return pdao.updatePatientInfo(newPatient);
+	/**
+	 * Validates a Person object, making sure the data within is formatted properly.
+	 * Regex created by Don Johnston.
+	 * https://regexlib.com/REDetails.aspx?regexp_id=607
+	 * @param p The Person object to validate.
+	 * @return True if the Person object is valid, false otherwise.
+	 */
+	private boolean isPersonValid(Person p) {
+		EmailValidator ev = EmailValidator.getInstance();
+		RegexValidator USPhoneValidator = new RegexValidator("^(?:\\([2-9]\\d{2}\\)\\ ?|[2-9]\\d{2}(?:\\-?|\\ ?))[2-9]\\d{2}[- ]?\\d{4}$");
+		
+		if(p.getName() != null && ev.isValid(p.getEmail()) && USPhoneValidator.isValid(p.getPhone())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
