@@ -29,9 +29,27 @@ public class Medication
     
     public Medication(int id, String name, String supplier, int amt_stored)
     {
-	this.id = id;
-	this.name = name;
-	this.supplier = supplier;
-	this.amountStored = amt_stored;
+		this.id = id;
+		this.name = name;
+		this.supplier = supplier;
+		this.amountStored = amt_stored;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getSupplier() {
+		return supplier;
+	}
+
+	public int getAmountStored() {
+		return amountStored;
+	}
+    
+    
 }
