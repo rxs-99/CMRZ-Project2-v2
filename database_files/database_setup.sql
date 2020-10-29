@@ -7,12 +7,20 @@ DROP TABLE IF EXISTS prescription;
 DROP TABLE IF EXISTS appointment;
 DROP TABLE IF EXISTS person;
 
+CREATE TABLE IF NOT EXISTS positionLookup(
+	positionID SERIAL UNIQUE NOT NULL,
+	"position" varchar(20) NOT NULL,
+	PRIMARY KEY (positionID)
+);
+
 CREATE TABLE IF NOT EXISTS person(
 	personID serial UNIQUE NOT NULL,
 	name varchar(50) NOT NULL,
 	phone varchar(15) NOT NULL,
 	email varchar(250) UNIQUE NOT NULL,
-	PRIMARY KEY (personID)
+	positionID int NOT NULL,
+	PRIMARY KEY (personID),
+	FOREIGN KEY(positionID) REFERENCES positionLookup(positionID)
 );
 
 CREATE TABLE IF NOT EXISTS authTable(
@@ -20,13 +28,6 @@ CREATE TABLE IF NOT EXISTS authTable(
 	username varchar(50) UNIQUE NOT NULL,
 	password varchar(64) NOT NULL,
 	PRIMARY KEY (username),
-	FOREIGN KEY(personID) REFERENCES person(personID)
-);
-
-CREATE TABLE IF NOT EXISTS positionLookup(
-	personID int UNIQUE NOT NULL,
-	"position" varchar(20) NOT NULL,
-	PRIMARY KEY (personID),
 	FOREIGN KEY(personID) REFERENCES person(personID)
 );
 

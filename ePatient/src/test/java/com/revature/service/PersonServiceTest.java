@@ -11,9 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import com.revature.dao.PersonDAO;
-import com.revature.model.Appointment;
 import com.revature.model.Person;
-import com.revature.model.Prescription;
 
 public class PersonServiceTest {
 
@@ -22,39 +20,31 @@ public class PersonServiceTest {
 
 	@Mock
 	public PersonDAO pdao;
-
-	public static Person testPatient = new Person(1, "Test Patient", "555-555-5555", "patient@email.com");
-
-	public static Person testDoctor = new Person(2, "Test Doctor", "777-777-7777", "doctor@email.com");
-
-	public static Appointment testAppt = new Appointment(1, testPatient, testDoctor, null, "Test comment.", "Approved");
-
-	// TODO fill once Prescription object class is filled.
-	public static Prescription testPrescription = new Prescription();
-
+	
+	public static Person testPatient = new Person(
+		1,
+		"Test Patient",
+		"555-555-5555",
+		"patient@email.com",
+		null
+	);
+	
+	public static Person testDoctor = new Person(
+		2,
+		"Test Doctor",
+		"777-777-7777",
+		"doctor@email.com",
+		null
+	);
+	
 	@Before
-	public void initPatientDAO() {
+	void initPatientDAO() {
 		MockitoAnnotations.openMocks(this);
 	}
 	
 	@Test
-	public void testCreateRefillRequestSuccess() {
-		int testPatientId = testPatient.getId();
-		int prescriptionId = 999;
-		Mockito.when(pdao.createRefillRequest(testPatientId, prescriptionId)).thenReturn(true);
-		
-		ps = new PersonService(pdao);
-		boolean success = ps.createRefillRequest(testPatientId, prescriptionId);
-		assertEquals(true, success);
-	}
-	
-	@Test
-	public void testCreateRefillRequestFail() {
-		// fail("Not yet implemented");
-	}
-	
-	@Test
 	public void testGetPatientInfo() {
+
 		int patientId = testPatient.getId();
 		Mockito.when(pdao.getPatientInfo(patientId)).thenReturn(testPatient);
 		

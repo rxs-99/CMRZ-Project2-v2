@@ -1,11 +1,48 @@
 package com.revature.dao;
 
 import com.revature.model.Person;
-import com.revature.model.Prescription;
 
 public interface PersonDAO {
-	public boolean createRefillRequest(int patientId, int perscriptionId);
+	
+	/**
+	 * Checks if a person is a patient.
+	 * @param personId The id of the person to check.
+	 * @return True if the person is a patient, false if not. This method also returns false in case of Hibernate/DB errors.
+	 */
+	public boolean isPatient(int personId);
+	
+	/**
+	 * Checks if a person is a nurse.
+	 * @param personId The id of the person to check.
+	 * @return True if the person is a nurse, false if not. This method also returns false in case of Hibernate/DB errors.
+	 */
+	public boolean isNurse(int personId);
+	
+	/**
+	 * Checks if a person is a doctor.
+	 * @param personId The id of the person to check.
+	 * @return True if the person is a doctor, false if not. This method also returns false in case of Hibernate/DB errors.
+	 */
+	public boolean isDoctor(int personId);
+	
+	/**
+	 * Adds a person to the database.
+	 * @param p The person to add to the database.
+	 * @return True if the person was successfully added, false otherwise.
+	 */
+	public boolean createPerson(Person p);
+	
+	/**
+	 * Searches for and returns a person, if one exists.
+	 * @param patientId The id of the person to search for.
+	 * @return The person with the patientId, or null if none was found/the DB encountered an error.
+	 */
 	public Person getPatientInfo(int patientId);
-	public Prescription getPersciptionInfo(int prescriptionId);
+	
+	/**
+	 * Updates a person with new information in the database.
+	 * @param patient The new details of the person.
+	 * @return True if the person was successfully updated, false otherwise.
+	 */
 	public boolean updatePatientInfo(Person patient);
 }
