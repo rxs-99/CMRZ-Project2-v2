@@ -16,13 +16,13 @@ public class HibernateSessionFactory {
 
 	public static Session getSession() {
 		if (sessionFactory == null) {
-/*
+/**/
 			// property obj to hold our connection info
 			Properties auth = new Properties();
 
 			// read properties from file
 			FileReader fr = null;
-			String filePath = "~/.auth/connection.prop";
+			String filePath = "/home/ec2-user/.auth/connection.prop";
 
 			try {
 				fr = new FileReader(filePath);
@@ -59,17 +59,17 @@ public class HibernateSessionFactory {
 					e.printStackTrace();
 				}
 			} 
-*/
-			/*
+/**/
+			
 			System.out.println(auth.getProperty("url"));
 			System.out.println(auth.getProperty("user"));
 			System.out.println(auth.getProperty("password"));
-			*/
+			
 
 			sessionFactory = new Configuration().configure()
-					.setProperty("hibernate.connection.url", "jdbc:postgresql://revature.cfoumzokvjgu.us-east-2.rds.amazonaws.com/revature"/*auth.getProperty("url")*/)
-					.setProperty("hibernate.connection.username", "postgres"/*auth.getProperty("user")*/)
-					.setProperty("hibernate.connection.password", "KB[v&p\\f-*23j]7T"/*auth.getProperty("password")*/)
+					.setProperty("hibernate.connection.url", /*"jdbc:postgresql://revature.cfoumzokvjgu.us-east-2.rds.amazonaws.com/revature"*//**/auth.getProperty("url")/**/)
+					.setProperty("hibernate.connection.username", /*"postgres"*//**/auth.getProperty("user")/**/)
+					.setProperty("hibernate.connection.password", /*"KB[v&p\\f-*23j]7T"*//**/auth.getProperty("password")/**/)
 					.buildSessionFactory();
 		}
 		return sessionFactory.getCurrentSession();
