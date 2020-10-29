@@ -19,15 +19,17 @@ public class HibernateSessionFactory {
 		if (sessionFactory == null) {
 			
 			String filePath = "connection.prop";
-			
+	
+			// path to connection.prop
 			File f = new File(filePath);
 			
+			// creates dummy connection file, if the file doesn't exist
 			if(!f.exists())
 			{
 				try {
 					f.createNewFile();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			}
