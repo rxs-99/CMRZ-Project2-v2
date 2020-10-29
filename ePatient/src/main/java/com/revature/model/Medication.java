@@ -13,18 +13,18 @@ import javax.persistence.Table;
 public class Medication
 {
     @Id
-    @Column(name = "medicationid")
+    @Column(name = "medicationID")
     @GeneratedValue(generator = "medication_id_seq", strategy = GenerationType.AUTO)
     @SequenceGenerator(allocationSize = 1, name = "medication_id_seq", sequenceName = "medication_id_seq")
     private int id;
-
-    @Column(nullable = false, unique = true)
+    
+    @Column
     private String name;
-
-    @Column(nullable = false)
+    
+    @Column
     private String supplier;
-
-    @Column(nullable = false)
+    
+    @Column
     private int amountStored;
     
     public Medication(int id, String name, String supplier, int amt_stored)
