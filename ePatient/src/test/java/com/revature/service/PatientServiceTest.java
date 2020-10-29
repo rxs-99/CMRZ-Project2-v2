@@ -53,21 +53,6 @@ class PatientServiceTest {
 	void initPatientDAO() {
 		MockitoAnnotations.openMocks(this);
 	}
-
-	@Test 
-	void testCreateAppointmentSuccess() {
-		int testPatientId = testPatient.getId();
-		Mockito.when(pdao.createAppointment(testPatientId, testAppt)).thenReturn(true);
-		
-		ps = new PatientService(pdao);
-		boolean success = ps.createAppointment(testPatientId, testAppt);
-		Assertions.assertEquals(true, success);
-	}
-	
-	@Test
-	void testCreateAppointmentFail() {
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	void testCreateRefillRequestSuccess() {
@@ -98,17 +83,6 @@ class PatientServiceTest {
 	@Test
 	void testGetPrescriptionInfo() {
 		fail("Not yet implemented");
-	}
-	
-	@Test
-	void testGetAppointmentInfo() {
-		// TODO: When getters/setters are defined in Appt, replace this with getId().
-		int apptId = 1;
-		Mockito.when(pdao.getAppointmentInfo(apptId)).thenReturn(testAppt);
-		
-		ps = new PatientService(pdao);
-		Appointment retrievedAppointment = ps.getAppointmentInfo(apptId);
-		Assertions.assertEquals(testAppt, retrievedAppointment);
 	}
 	
 	@Test

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.dao.PatientDAO;
-import com.revature.model.Appointment;
 import com.revature.model.Person;
 import com.revature.model.Prescription;
 
@@ -17,10 +16,6 @@ public class PatientService {
 		this.pdao = pdao;
 	}
 	
-	public boolean createAppointment(int patientId, Appointment appt) {
-		return pdao.createAppointment(patientId, appt);
-	}
-	
 	public boolean createRefillRequest(int patientId, int prescriptionId) {
 		return pdao.createRefillRequest(patientId, prescriptionId);
 	}
@@ -31,10 +26,6 @@ public class PatientService {
 	
 	public Prescription getPrescriptionInfo(int prescriptionId) {
 		return pdao.getPersciptionInfo(prescriptionId);
-	}
-	
-	public Appointment getAppointmentInfo(int appointmentId) {
-		return pdao.getAppointmentInfo(appointmentId);
 	}
 	
 	public boolean updatePatientInfo(Person newPatient) {
