@@ -6,12 +6,15 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import com.revature.model.Medication;
 import com.revature.model.Prescription;
 import com.revature.utility.HibernateSessionFactory;
 
-public class PrescriptionDAOImpl implements PrescriptionDAO {
+@Repository("prescriptionRepository")
+public class PrescriptionDAOImpl implements PrescriptionDAO 
+{
 
 	@Override
 	public boolean add(Prescription p) 

@@ -3,13 +3,24 @@ package com.revature.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.revature.dao.AppointmentDAOImpl;
 import com.revature.dao.MedicationDAO;
 import com.revature.dao.MedicationDAOImpl;
 import com.revature.model.Medication;
 
+@Service("medicationService")
 public class MedicationService 
 {
-	MedicationDAO md = new MedicationDAOImpl();
+	MedicationDAO md;
+	
+	@Autowired
+    public void setAppointmentService(MedicationDAOImpl medicationDAO) 
+	{
+        this.md = medicationDAO;
+    }
 	
 	public List<Medication> getAll()
 	{

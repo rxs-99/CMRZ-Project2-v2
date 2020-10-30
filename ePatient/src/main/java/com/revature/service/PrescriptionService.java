@@ -3,16 +3,27 @@ package com.revature.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.revature.dao.AppointmentDAOImpl;
 import com.revature.dao.PrescriptionDAO;
 import com.revature.dao.PrescriptionDAOImpl;
 import com.revature.model.Medication;
 import com.revature.model.Person;
 import com.revature.model.Prescription;
 
+@Service("prescriptionService")
 public class PrescriptionService
 {
 	// reference to Prescription DAO
-	PrescriptionDAO pd = new PrescriptionDAOImpl();
+	PrescriptionDAO pd;
+	
+	@Autowired
+    public void setAppointmentService(PrescriptionDAO prescriptionDAO) 
+	{
+        this.pd = prescriptionDAO;
+    }
 	
 	/**Returns All Prescriptions from the database*/
 	public List<Prescription> getAll()
