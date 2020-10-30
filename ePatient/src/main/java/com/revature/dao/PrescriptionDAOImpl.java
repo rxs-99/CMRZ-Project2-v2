@@ -100,7 +100,7 @@ public class PrescriptionDAOImpl implements PrescriptionDAO
 			s = HibernateSessionFactory.getSession();
 			t = s.beginTransaction();
 			
-			prescriptions = s.createQuery("FROM prescription", Prescription.class).getResultList();
+			prescriptions = s.createQuery("FROM Prescription", Prescription.class).getResultList();
 			
 			t.commit();
 			
