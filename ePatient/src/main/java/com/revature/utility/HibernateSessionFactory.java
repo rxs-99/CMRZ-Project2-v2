@@ -18,7 +18,7 @@ public class HibernateSessionFactory {
 	public static Session getSession() {
 		if (sessionFactory == null) {
 			
-			String filePath = "./connection.prop";
+			String filePath = "connection.prop";
 	
 			// path to connection.prop
 			File f = new File(filePath);
