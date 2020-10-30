@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.revature.dao.MedicationDAO;
 import com.revature.model.Medication;
-
-
 
 public class MedicationServiceTest 
 {
@@ -46,9 +43,9 @@ public class MedicationServiceTest
 		
 		List<Medication> l = medicationService.getAll();
 		
-		assertEquals("Xanax", l.get(0).getSupplier());
-		assertEquals("Oxaydo", l.get(1).getSupplier());
-		assertEquals("Advil", l.get(2).getSupplier());
+		Assert.assertEquals("Xanax", l.get(0).getSupplier());
+		Assert.assertEquals("Oxaydo", l.get(1).getSupplier());
+		Assert.assertEquals("Advil", l.get(2).getSupplier());
 	}
 	
 	
@@ -59,9 +56,9 @@ public class MedicationServiceTest
 		
 		List<Medication> l = medicationService.getAllAvailableMedications();
 		
-		assertEquals("Oxaydo", l.get(0).getSupplier());
-		assertEquals("Advil", l.get(1).getSupplier());
-		assertEquals(2, l.size());
+		Assert.assertEquals("Oxaydo", l.get(0).getSupplier());
+		Assert.assertEquals("Advil", l.get(1).getSupplier());
+		Assert.assertEquals(2, l.size());
 	}
 
 }
