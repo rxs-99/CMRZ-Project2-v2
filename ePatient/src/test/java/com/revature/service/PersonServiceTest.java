@@ -20,11 +20,11 @@ public class PersonServiceTest {
 	@Mock
 	public PersonDAO pdao;
 	
-	public static Person testPatient = new Person(
+	public static Person testPerson = new Person(
 		1,
-		"Test Patient",
+		"Test Person",
 		"555-555-5555",
-		"patient@email.com",
+		"person@email.com",
 		null
 	);
 	
@@ -37,16 +37,16 @@ public class PersonServiceTest {
 	);
 	
 	@Before
-	public void initPatientDAO() {
+	public void initPersonDAO() {
 		MockitoAnnotations.openMocks(this);
 	}
 	
 	@Test
 	public void testCreatePersonSuccess() {
-		Mockito.when(pdao.createPerson(testPatient)).thenReturn(true);
+		Mockito.when(pdao.createPerson(testPerson)).thenReturn(true);
 		
 		ps = new PersonService(pdao);
-		boolean success = ps.createPerson(testPatient);
+		boolean success = ps.createPerson(testPerson);
 		assertEquals(true, success);
 	}
 	
@@ -56,7 +56,7 @@ public class PersonServiceTest {
 			1,
 			null,
 			"555-555-5555",
-			"patient@email.com",
+			"person@email.com",
 			null
 		);
 		Mockito.when(pdao.createPerson(badPerson)).thenReturn(true);
@@ -88,7 +88,7 @@ public class PersonServiceTest {
 			1,
 			null,
 			"badnumber24341",
-			"patient@email.com",
+			"person@email.com",
 			null
 		);
 		Mockito.when(pdao.createPerson(badPerson)).thenReturn(true);
@@ -99,43 +99,43 @@ public class PersonServiceTest {
 	}
 	
 	@Test
-	public void testGetPatientInfo() {
+	public void testGetPersonInfo() {
 
-		int patientId = testPatient.getId();
-		Mockito.when(pdao.getPatientInfo(patientId)).thenReturn(testPatient);
+		int personId = testPerson.getId();
+		Mockito.when(pdao.getPersonInfo(personId)).thenReturn(testPerson);
 		
 		ps = new PersonService(pdao);
-		Person retrievedPatient = ps.getPatientInfo(patientId);
-		assertEquals(testPatient, retrievedPatient);
+		Person retrievedPerson = ps.getPersonInfo(personId);
+		assertEquals(testPerson, retrievedPerson);
 	}
 	
 	@Test
-	public void testUpdatePatientInfoSuccess() {
-		Mockito.when(pdao.updatePatientInfo(testPatient)).thenReturn(true);
+	public void testUpdatePersonInfoSuccess() {
+		Mockito.when(pdao.updatePersonInfo(testPerson)).thenReturn(true);
 		
 		ps = new PersonService(pdao);
-		boolean success = ps.updatePatientInfo(testPatient);
+		boolean success = ps.updatePersonInfo(testPerson);
 		assertEquals(true, success);
 	}
 	
 	@Test
-	public void testUpdatePatientInfoFailNoName() {
+	public void testUpdatePersonInfoFailNoName() {
 		Person badPerson = new Person(
 			1,
 			null,
 			"555-555-5555",
-			"patient@email.com",
+			"person@email.com",
 			null
 		);
-		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		Mockito.when(pdao.updatePersonInfo(badPerson)).thenReturn(true);
 		
 		ps = new PersonService(pdao);
-		boolean success = ps.updatePatientInfo(badPerson);
+		boolean success = ps.updatePersonInfo(badPerson);
 		assertEquals(false, success);
 	}
 	
 	@Test
-	public void testUpdatePatientInfoFailBadEmail() {
+	public void testUpdatePersonInfoFailBadEmail() {
 		Person badPerson = new Person(
 			1,
 			"Test Person",
@@ -143,26 +143,26 @@ public class PersonServiceTest {
 			"bademail",
 			null
 		);
-		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		Mockito.when(pdao.updatePersonInfo(badPerson)).thenReturn(true);
 		
 		ps = new PersonService(pdao);
-		boolean success = ps.updatePatientInfo(badPerson);
+		boolean success = ps.updatePersonInfo(badPerson);
 		assertEquals(false, success);
 	}
 	
 	@Test
-	public void testUpdatePatientInfoFailBadPhone() {
+	public void testUpdatePersonInfoFailBadPhone() {
 		Person badPerson = new Person(
 			1,
 			null,
 			"badnumber24341",
-			"patient@email.com",
+			"person@email.com",
 			null
 		);
-		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		Mockito.when(pdao.updatePersonInfo(badPerson)).thenReturn(true);
 		
 		ps = new PersonService(pdao);
-		boolean success = ps.updatePatientInfo(badPerson);
+		boolean success = ps.updatePersonInfo(badPerson);
 		assertEquals(false, success);
 	}
 }

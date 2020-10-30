@@ -25,6 +25,6 @@ public class PersonController {
 	
 	@GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Person> getPerson(@PathVariable int id) {
-		return new ResponseEntity<Person>(ps.getPatientInfo(id), HttpStatus.OK);
+		return new ResponseEntity<Person>(ps.getPersonInfo(id), HttpStatus.OK);
 	}
 }

@@ -42,7 +42,7 @@ public class PrescriptionServiceTest
 		);
 
 	private static List<Prescription> testPrescriptions = new ArrayList<>(Arrays.asList(
-			new Prescription(1, MedicationServiceTest.testMedications.get(0), PersonServiceTest.testPatient, PersonServiceTest.testDoctor, 3),
+			new Prescription(1, MedicationServiceTest.testMedications.get(0), PersonServiceTest.testPerson, PersonServiceTest.testDoctor, 3),
 			new Prescription(2, MedicationServiceTest.testMedications.get(1), anotherPatient, PersonServiceTest.testDoctor, 6.23),
 			new Prescription(3, MedicationServiceTest.testMedications.get(2), anotherPatient, anotherDoctor, 4)
 			
