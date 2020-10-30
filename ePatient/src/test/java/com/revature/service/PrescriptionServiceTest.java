@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -15,8 +15,6 @@ import org.mockito.MockitoAnnotations;
 import com.revature.dao.PrescriptionDAO;
 import com.revature.model.Person;
 import com.revature.model.Prescription;
-
-import junit.framework.Assert;
 
 public class PrescriptionServiceTest 
 {
@@ -53,7 +51,7 @@ public class PrescriptionServiceTest
 	@Before
 	public void before() 
 	{
-		MockitoAnnotations.initMocks(this);
+		MockitoAnnotations.openMocks(this);
 	}
 	
 	@Test
@@ -63,9 +61,9 @@ public class PrescriptionServiceTest
 		
 		List<Prescription> l = prescriptionService.getAll();
 		
-		Assert.assertEquals(3.0, l.get(0).getDosage());
-		Assert.assertEquals(6.23, l.get(1).getDosage());
-		Assert.assertEquals(4.0, l.get(2).getDosage());
+		Assert.assertEquals(1, l.get(0).getId());
+		Assert.assertEquals(2, l.get(1).getId());
+		Assert.assertEquals(3, l.get(2).getId());
 	}
 	
 	@Test
@@ -75,8 +73,8 @@ public class PrescriptionServiceTest
 		
 		List<Prescription> l = prescriptionService.getPrescriptionsByDoctor(PersonServiceTest.testDoctor);
 		
-		Assert.assertEquals(3.0, l.get(0).getDosage());
-		Assert.assertEquals(6.23, l.get(1).getDosage());
+		Assert.assertEquals(PersonServiceTest.testDoctor, l.get(0).getDoctor());
+		Assert.assertEquals(PersonServiceTest.testDoctor, l.get(1).getDoctor());
 		Assert.assertEquals(2, l.size());
 	}
 	
