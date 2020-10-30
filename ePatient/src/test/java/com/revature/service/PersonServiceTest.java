@@ -8,7 +8,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import com.revature.dao.PersonDAO;
 import com.revature.model.Person;
@@ -43,6 +42,63 @@ public class PersonServiceTest {
 	}
 	
 	@Test
+	public void testCreatePersonSuccess() {
+		Mockito.when(pdao.createPerson(testPatient)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.createPerson(testPatient);
+		assertEquals(true, success);
+	}
+	
+	@Test
+	public void testCreatePersonFailNoName() {
+		Person badPerson = new Person(
+			1,
+			null,
+			"555-555-5555",
+			"patient@email.com",
+			null
+		);
+		Mockito.when(pdao.createPerson(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.createPerson(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testCreatePersonFailBadEmail() {
+		Person badPerson = new Person(
+			1,
+			"Test Person",
+			"555-555-5555",
+			"bademail",
+			null
+		);
+		Mockito.when(pdao.createPerson(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.createPerson(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testCreatePersonFailBadPhone() {
+		Person badPerson = new Person(
+			1,
+			null,
+			"badnumber24341",
+			"patient@email.com",
+			null
+		);
+		Mockito.when(pdao.createPerson(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.createPerson(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
 	public void testGetPatientInfo() {
 
 		int patientId = testPatient.getId();
@@ -51,11 +107,6 @@ public class PersonServiceTest {
 		ps = new PersonService(pdao);
 		Person retrievedPatient = ps.getPatientInfo(patientId);
 		assertEquals(testPatient, retrievedPatient);
-	}
-	
-	@Test
-	public void testGetPrescriptionInfo() {
-		// fail("Not yet implemented");
 	}
 	
 	@Test
@@ -68,7 +119,50 @@ public class PersonServiceTest {
 	}
 	
 	@Test
-	public void testUpdatePatientInfoFail() {
-		// fail("Not yet implemented");
+	public void testUpdatePatientInfoFailNoName() {
+		Person badPerson = new Person(
+			1,
+			null,
+			"555-555-5555",
+			"patient@email.com",
+			null
+		);
+		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.updatePatientInfo(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testUpdatePatientInfoFailBadEmail() {
+		Person badPerson = new Person(
+			1,
+			"Test Person",
+			"555-555-5555",
+			"bademail",
+			null
+		);
+		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.updatePatientInfo(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testUpdatePatientInfoFailBadPhone() {
+		Person badPerson = new Person(
+			1,
+			null,
+			"badnumber24341",
+			"patient@email.com",
+			null
+		);
+		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.updatePatientInfo(badPerson);
+		assertEquals(false, success);
 	}
 }
