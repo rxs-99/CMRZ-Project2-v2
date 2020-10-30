@@ -11,14 +11,11 @@ public class LoginServiceTest {
 
 	@Test
 	public void testLogin() {
-
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		LoginService l = ctx.getBean("loginService", LoginService.class);
+		LoginService l = new LoginService();
 		
 		assertEquals(l.login("user", "password"), 1);
 		assertEquals(l.login("user", "password1"), -1);
 		assertEquals(l.login("gjhsfgjh", "password"), -1);
-		((ConfigurableApplicationContext) ctx).close();
 		
 	}
 	
