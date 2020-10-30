@@ -6,10 +6,12 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import com.revature.model.Medication;
 import com.revature.utility.HibernateSessionFactory;
 
+@Repository(value = "medicationRepository")
 public class MedicationDAOImpl implements MedicationDAO
 {
 
@@ -97,7 +99,7 @@ public class MedicationDAOImpl implements MedicationDAO
 			s = HibernateSessionFactory.getSession();
 			t = s.beginTransaction();
 			
-			medications = s.createQuery("FROM medication", Medication.class).getResultList();
+			medications = s.createQuery("FROM Medication", Medication.class).getResultList();
 			
 			t.commit();
 			
