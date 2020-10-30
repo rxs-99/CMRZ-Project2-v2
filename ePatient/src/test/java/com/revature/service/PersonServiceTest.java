@@ -1,23 +1,22 @@
 package com.revature.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertEquals;
+
 import com.revature.dao.PersonDAO;
 import com.revature.model.Person;
 
-class PersonServiceTest {
-	
+public class PersonServiceTest {
+
 	@InjectMocks
 	public static PersonService ps;
-	
+
 	@Mock
 	public PersonDAO pdao;
 	
@@ -37,37 +36,133 @@ class PersonServiceTest {
 		null
 	);
 	
-	@BeforeEach
-	void initPatientDAO() {
+	@Before
+	public void initPatientDAO() {
 		MockitoAnnotations.openMocks(this);
 	}
 	
 	@Test
-	void testGetPatientInfo() {
+	public void testCreatePersonSuccess() {
+		Mockito.when(pdao.createPerson(testPatient)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.createPerson(testPatient);
+		assertEquals(true, success);
+	}
+	
+	@Test
+	public void testCreatePersonFailNoName() {
+		Person badPerson = new Person(
+			1,
+			null,
+			"555-555-5555",
+			"patient@email.com",
+			null
+		);
+		Mockito.when(pdao.createPerson(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.createPerson(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testCreatePersonFailBadEmail() {
+		Person badPerson = new Person(
+			1,
+			"Test Person",
+			"555-555-5555",
+			"bademail",
+			null
+		);
+		Mockito.when(pdao.createPerson(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.createPerson(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testCreatePersonFailBadPhone() {
+		Person badPerson = new Person(
+			1,
+			null,
+			"badnumber24341",
+			"patient@email.com",
+			null
+		);
+		Mockito.when(pdao.createPerson(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.createPerson(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testGetPatientInfo() {
+
 		int patientId = testPatient.getId();
 		Mockito.when(pdao.getPatientInfo(patientId)).thenReturn(testPatient);
 		
 		ps = new PersonService(pdao);
 		Person retrievedPatient = ps.getPatientInfo(patientId);
-		Assertions.assertEquals(testPatient, retrievedPatient);
+		assertEquals(testPatient, retrievedPatient);
 	}
 	
 	@Test
-	void testGetPrescriptionInfo() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	void testUpdatePatientInfoSuccess() {
+	public void testUpdatePatientInfoSuccess() {
 		Mockito.when(pdao.updatePatientInfo(testPatient)).thenReturn(true);
 		
 		ps = new PersonService(pdao);
 		boolean success = ps.updatePatientInfo(testPatient);
-		Assertions.assertEquals(true, success);
+		assertEquals(true, success);
 	}
 	
 	@Test
-	void testUpdatePatientInfoFail() {
-		fail("Not yet implemented");
+	public void testUpdatePatientInfoFailNoName() {
+		Person badPerson = new Person(
+			1,
+			null,
+			"555-555-5555",
+			"patient@email.com",
+			null
+		);
+		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.updatePatientInfo(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testUpdatePatientInfoFailBadEmail() {
+		Person badPerson = new Person(
+			1,
+			"Test Person",
+			"555-555-5555",
+			"bademail",
+			null
+		);
+		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.updatePatientInfo(badPerson);
+		assertEquals(false, success);
+	}
+	
+	@Test
+	public void testUpdatePatientInfoFailBadPhone() {
+		Person badPerson = new Person(
+			1,
+			null,
+			"badnumber24341",
+			"patient@email.com",
+			null
+		);
+		Mockito.when(pdao.updatePatientInfo(badPerson)).thenReturn(true);
+		
+		ps = new PersonService(pdao);
+		boolean success = ps.updatePatientInfo(badPerson);
+		assertEquals(false, success);
 	}
 }
