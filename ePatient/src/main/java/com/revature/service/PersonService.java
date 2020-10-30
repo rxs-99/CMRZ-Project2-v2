@@ -37,13 +37,13 @@ public class PersonService {
 		}	
 	}
 	
-	public Person getPatientInfo(int patientId) {
-		return pdao.getPatientInfo(patientId);
+	public Person getPersonInfo(int personId) {
+		return pdao.getPersonInfo(personId);
 	}
 	
-	public boolean updatePatientInfo(Person newPatient) {
-		if(isPersonValid(newPatient)) {
-			return pdao.updatePatientInfo(newPatient);
+	public boolean updatePersonInfo(Person updatedPerson) {
+		if(isPersonValid(updatedPerson)) {
+			return pdao.updatePersonInfo(updatedPerson);
 		} else {
 			return false;
 		}	
