@@ -212,3 +212,5 @@ testem.log
 .DS_Store
 Thumbs.db
 ePatient/connection.prop
+
+**/Driver
