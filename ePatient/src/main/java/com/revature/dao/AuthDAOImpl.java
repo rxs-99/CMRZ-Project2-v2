@@ -2,16 +2,17 @@ package com.revature.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import com.revature.model.LoginEntry;
 import com.revature.utility.Encryptor;
 import com.revature.utility.HibernateSessionFactory;
 
+@Repository("authDAO")
 public class AuthDAOImpl implements AuthDAO {
 
 	/*
-	 * login - returns the id of the person given a username and
-	 * an unencrypted password
+	 * see com.revature.dao.AuthDAO
 	 */
 	@Override
 	public int login(String username, String password) {
