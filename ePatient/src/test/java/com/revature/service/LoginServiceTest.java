@@ -9,8 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class LoginServiceTest {
 
-	// Rabinson removed this test because was getting error .. maybe we will learn Spring MVC testing tomorrow (Friday)
-	//@Test
+	@Test
 	public void testLogin() {
 
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
