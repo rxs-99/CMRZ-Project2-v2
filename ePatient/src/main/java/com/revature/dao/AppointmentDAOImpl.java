@@ -11,10 +11,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.revature.model.Appointment;
 import com.revature.utility.HibernateSessionFactory;
 
+@Repository(value = "appointmentRepository")
 public class AppointmentDAOImpl implements AppointmentDAO {
 
 	/*

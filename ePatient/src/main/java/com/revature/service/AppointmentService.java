@@ -6,12 +6,17 @@ import com.revature.dao.AppointmentDAO;
 import com.revature.dao.AppointmentDAOImpl;
 import com.revature.model.Appointment;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service(value = "appointmentService")
 public class AppointmentService {
     
     private AppointmentDAO appointmentDAO;
 
-    public AppointmentService(){
-        this.appointmentDAO = new AppointmentDAOImpl();
+    @Autowired
+    public void setAppointmentService(AppointmentDAOImpl appointmentDAO) {
+        this.appointmentDAO = appointmentDAO;
     }
 
     public boolean add(Appointment appointment){
