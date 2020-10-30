@@ -40,6 +40,7 @@ public class HibernateSessionFactory {
 			// read properties from file
 			FileReader fr = null;
 			
+			System.out.println("Filepath: " + f.getAbsolutePath());
 
 			try {
 				fr = new FileReader(filePath);
@@ -84,9 +85,9 @@ public class HibernateSessionFactory {
 			
 
 			sessionFactory = new Configuration().configure()
-					.setProperty("hibernate.connection.url", auth.getProperty("url"))
-					.setProperty("hibernate.connection.username", auth.getProperty("user"))
-					.setProperty("hibernate.connection.password", auth.getProperty("password"))
+					.setProperty("hibernate.connection.url", "jdbc:postgresql://revature.cfoumzokvjgu.us-east-2.rds.amazonaws.com/revature"/**auth.getProperty("url")/**/)
+					.setProperty("hibernate.connection.username", "postgres"/**auth.getProperty("user")/**/)
+					.setProperty("hibernate.connection.password", "KB[v&p\\f-*23j]7T"/**auth.getProperty("password")/**/)
 					.buildSessionFactory();
 		}
 		return sessionFactory.getCurrentSession();

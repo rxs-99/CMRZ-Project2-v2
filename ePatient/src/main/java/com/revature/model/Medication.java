@@ -27,6 +27,11 @@ public class Medication
     @Column(nullable = false)
     private int amountStored;
     
+    public Medication()
+    {
+    	
+    }
+    
     public Medication(int id, String name, String supplier, int amt_stored)
     {
 		this.id = id;
@@ -34,6 +39,24 @@ public class Medication
 		this.supplier = supplier;
 		this.amountStored = amt_stored;
     }
+    
+    public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
+	}
+
+	public void setAmountStored(int amountStored) {
+		this.amountStored = amountStored;
+	}
+
+	
 
 	public int getId() {
 		return id;

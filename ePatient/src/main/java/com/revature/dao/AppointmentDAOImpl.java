@@ -11,10 +11,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.revature.model.Appointment;
 import com.revature.utility.HibernateSessionFactory;
 
+@Repository(value = "appointmentRepository")
 public class AppointmentDAOImpl implements AppointmentDAO {
 
 	/*
@@ -59,12 +61,16 @@ public class AppointmentDAOImpl implements AppointmentDAO {
     	try {
     		s = HibernateSessionFactory.getSession();
 			tx = s.beginTransaction();
-    		
+			
+			/*
 			if(s.merge(appointment)==null)
 				b = false;
-			
+			*/
+			// commented out the merge statement because we don't want to create a new record on update if there is no record
+			s.update(appointment);
+
 			tx.commit();
-    	} catch(HibernateException e) {
+    	} catch(Exception e) {
     		e.printStackTrace();
     		tx.rollback();
     		b = false;
