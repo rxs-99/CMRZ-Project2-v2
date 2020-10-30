@@ -1,17 +1,27 @@
 package com.revature.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.revature.dao.AuthDAO;
 import com.revature.dao.AuthDAOImpl;
-import com.revature.model.Person;
 
+@Service("loginService")
 public class LoginService {
+
+	private AuthDAO authDAO;
+		
+	@Autowired
+	public void setAuthDAO(AuthDAO authDAO) {
+		this.authDAO = authDAO;
+	}
 
 	/*
 	 * see com.revature.dao.AuthDAOImpl
 	 */
 	public int login(String username, String password) {
-		AuthDAO auth = new AuthDAOImpl();
-		return auth.login(username, password);
+		authDAO = new AuthDAOImpl();
+		return authDAO.login(username, password);
 	}
 	
 }
