@@ -8,7 +8,7 @@ import com.revature.dao.AuthDAOImpl;
 import com.revature.model.Person;
 
 @Service("loginService")
-public class LoginService {
+public class LoginService { 
 
 	private AuthDAO authDAO;
 		
