@@ -1,12 +1,15 @@
 package com.revature.controller; 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.dao.PersonDAO;
-import com.revature.dao.PersonDAOImpl;
+import com.revature.model.Person;
 import com.revature.service.LoginService;
 
 @RestController("loginController")
@@ -20,22 +23,9 @@ public class LoginController {
 		this.loginService = loginService;
 	}
 
-	@PostMapping(value = "*")
-	public String login() {
-		int p = loginService.login("colbyat","password");
-		
-		if(p==-1)
-			return "index";
-		
-		PersonDAO pdao = new PersonDAOImpl();
-		
-		if(pdao.isDoctor(p))
-			return "doctor";
-		else if(pdao.isNurse(p))
-			return "nurse";
-		else
-			return "patient";
-
+	@PostMapping(produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public Person login(HttpServletRequest request, HttpServletResponse response) {
+		return this.loginService.login(request.getParameter("username"), request.getParameter("password"));
 	}
 	
 }

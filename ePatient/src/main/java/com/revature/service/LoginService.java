@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.dao.AuthDAO;
 import com.revature.dao.AuthDAOImpl;
+import com.revature.model.Person;
 
 @Service("loginService")
 public class LoginService {
@@ -19,7 +20,7 @@ public class LoginService {
 	/*
 	 * see com.revature.dao.AuthDAOImpl
 	 */
-	public int login(String username, String password) {
+	public Person login(String username, String password) {
 		authDAO = new AuthDAOImpl();
 		return authDAO.login(username, password);
 	}
