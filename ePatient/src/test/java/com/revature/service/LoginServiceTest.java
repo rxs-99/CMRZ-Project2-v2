@@ -1,7 +1,6 @@
 package com.revature.service;
 
-import static org.junit.Assert.assertEquals;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class LoginServiceTest {
@@ -10,9 +9,9 @@ public class LoginServiceTest {
 	public void testLogin() {
 		LoginService l = new LoginService();
 		
-		assertEquals(l.login("user", "password"), 1);
-		assertEquals(l.login("user", "password1"), -1);
-		assertEquals(l.login("gjhsfgjh", "password"), -1);
+		Assert.assertNotNull(l.login("user", "password"));
+		Assert.assertEquals(l.login("user", "password1"), null);
+		Assert.assertEquals(l.login("gjhsfgjh", "password"), null);
 		
 	}
 	
