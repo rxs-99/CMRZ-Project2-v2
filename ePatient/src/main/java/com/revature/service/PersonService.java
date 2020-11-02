@@ -59,7 +59,7 @@ public class PersonService {
 	private boolean isPersonValid(Person p) {
 		EmailValidator ev = EmailValidator.getInstance();
 		RegexValidator USPhoneValidator = new RegexValidator("^(?:\\([2-9]\\d{2}\\)\\ ?|[2-9]\\d{2}(?:\\-?|\\ ?))[2-9]\\d{2}[- ]?\\d{4}$");
-		
+
 		if(p.getName() != null && ev.isValid(p.getEmail()) && USPhoneValidator.isValid(p.getPhone())) {
 			return true;
 		} else {
