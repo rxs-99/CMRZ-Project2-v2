@@ -34,15 +34,15 @@ public interface PersonDAO {
 	
 	/**
 	 * Searches for and returns a person, if one exists.
-	 * @param patientId The id of the person to search for.
-	 * @return The person with the patientId, or null if none was found/the DB encountered an error.
+	 * @param personId The id of the person to search for.
+	 * @return The person with the personId, or null if none was found/the DB encountered an error.
 	 */
-	public Person getPatientInfo(int patientId);
+	public Person getPersonInfo(int personId);
 	
 	/**
 	 * Updates a person with new information in the database.
-	 * @param patient The new details of the person.
+	 * @param p The new details of the person.
 	 * @return True if the person was successfully updated, false otherwise.
 	 */
-	public boolean updatePatientInfo(Person patient);
+	public boolean updatePersonInfo(Person p);
 }

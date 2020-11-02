@@ -109,7 +109,7 @@ public class PersonDAOImpl implements PersonDAO {
 	}
 
 	@Override
-	public Person getPatientInfo(int patientId) {
+	public Person getPersonInfo(int personId) {
 		Session sess = HibernateSessionFactory.getSession();
 		Transaction tx = sess.beginTransaction();
 		
@@ -119,7 +119,7 @@ public class PersonDAOImpl implements PersonDAO {
 			Root<Person> root = cq.from(Person.class);
 			
 			cq.select(root);
-			cq.where(cb.equal(root.get("id"), patientId));
+			cq.where(cb.equal(root.get("id"), personId));
 			Query<Person> q = sess.createQuery(cq);
 			
 			Person p = q.getSingleResult();
@@ -138,7 +138,7 @@ public class PersonDAOImpl implements PersonDAO {
 	 * This will fail if updatedPerson is transient!
 	 */
 	@Override
-	public boolean updatePatientInfo(Person updatedPerson) {
+	public boolean updatePersonInfo(Person updatedPerson) {
 		Session sess = HibernateSessionFactory.getSession();
 		Transaction tx = sess.beginTransaction();
 		

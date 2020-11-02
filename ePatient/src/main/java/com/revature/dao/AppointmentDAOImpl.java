@@ -61,12 +61,16 @@ public class AppointmentDAOImpl implements AppointmentDAO {
     	try {
     		s = HibernateSessionFactory.getSession();
 			tx = s.beginTransaction();
-    		
+			
+			/*
 			if(s.merge(appointment)==null)
 				b = false;
-			
+			*/
+			// commented out the merge statement because we don't want to create a new record on update if there is no record
+			s.update(appointment);
+
 			tx.commit();
-    	} catch(HibernateException e) {
+    	} catch(Exception e) {
     		e.printStackTrace();
     		tx.rollback();
     		b = false;
