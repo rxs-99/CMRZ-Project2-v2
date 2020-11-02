@@ -5,6 +5,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.model.LoginEntry;
+import com.revature.model.Person;
 import com.revature.utility.Encryptor;
 import com.revature.utility.HibernateSessionFactory;
 
@@ -15,11 +16,11 @@ public class AuthDAOImpl implements AuthDAO {
 	 * see com.revature.dao.AuthDAO
 	 */
 	@Override
-	public int login(String username, String password) {
+	public Person login(String username, String password) {
 		
 		Session s = null;
 		Transaction tx = null;
-		int id = -1;
+		Person p = null;
 		
 		try {
 			s = HibernateSessionFactory.getSession();
@@ -28,7 +29,7 @@ public class AuthDAOImpl implements AuthDAO {
 			LoginEntry user = s.get(LoginEntry.class, username);
 			
 			if(user!=null && user.getPassword().equals(Encryptor.encrypt(password)))
-				id = user.getPerson().getId();
+				p = user.getPerson();
 			tx.commit();
 			
 		} catch(Exception e) {
@@ -38,7 +39,7 @@ public class AuthDAOImpl implements AuthDAO {
 			s.close();
 		}
 		
-		return id;
+		return p;
 	}
 
 }
