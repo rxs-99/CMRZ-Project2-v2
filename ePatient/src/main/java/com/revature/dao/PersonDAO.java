@@ -1,5 +1,7 @@
 package com.revature.dao;
 
+import java.util.List;
+
 import com.revature.model.Person;
 
 public interface PersonDAO {
@@ -45,4 +47,10 @@ public interface PersonDAO {
 	 * @return True if the person was successfully updated, false otherwise.
 	 */
 	public boolean updatePersonInfo(Person p);
+	
+	/**
+	 * Returns a list of all people classified as doctors.
+	 * @return A list of all doctors within the database.
+	 */
+	public List<Person> getAllDoctors();
 }

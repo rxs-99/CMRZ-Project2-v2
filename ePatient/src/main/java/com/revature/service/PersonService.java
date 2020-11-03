@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.List;
+
 import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.commons.validator.routines.RegexValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,10 @@ public class PersonService {
 		}	
 	}
 	
+	public List<Person> getAllDoctors() {
+		return pdao.getAllDoctors();
+	}
+	
 	/**
 	 * Validates a Person object, making sure the data within is formatted properly.
 	 * Regex created by Don Johnston.
@@ -59,7 +65,7 @@ public class PersonService {
 	private boolean isPersonValid(Person p) {
 		EmailValidator ev = EmailValidator.getInstance();
 		RegexValidator USPhoneValidator = new RegexValidator("^(?:\\([2-9]\\d{2}\\)\\ ?|[2-9]\\d{2}(?:\\-?|\\ ?))[2-9]\\d{2}[- ]?\\d{4}$");
-		
+
 		if(p.getName() != null && ev.isValid(p.getEmail()) && USPhoneValidator.isValid(p.getPhone())) {
 			return true;
 		} else {

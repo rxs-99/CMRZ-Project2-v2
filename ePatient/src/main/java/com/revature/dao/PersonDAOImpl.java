@@ -1,5 +1,8 @@
 package com.revature.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -149,6 +152,25 @@ public class PersonDAOImpl implements PersonDAO {
 		} catch(HibernateException he) {
 			tx.rollback();
 			return false;
+		} finally {
+			sess.close();
+		}
+	}
+
+	@Override
+	public List<Person> getAllDoctors() {
+		Session sess = HibernateSessionFactory.getSession();
+		Transaction tx = sess.beginTransaction();
+		
+		try {
+			Query<Person> q = sess.createQuery("SELECT p FROM Person AS p WHERE p.position.name = 'doctor'", Person.class);
+			List<Person> doctors = q.list();
+			
+			tx.commit();
+			return doctors;
+		} catch(HibernateException he) {
+			tx.rollback();
+			return new ArrayList<Person>();
 		} finally {
 			sess.close();
 		}
