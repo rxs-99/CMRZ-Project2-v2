@@ -34,6 +34,7 @@ public class AppointmentService {
     public List<Appointment> getAppointmentByStatus(String status){
         return this.appointmentDAO.getAppointmentByStatus(status);
     }
+        
     public List<Appointment> getAll(){
         return this.appointmentDAO.getAll();
     }
