@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.dao.AppointmentDAOImpl;
 import com.revature.dao.MedicationDAO;
 import com.revature.dao.MedicationDAOImpl;
 import com.revature.model.Medication;
@@ -48,5 +47,14 @@ public class MedicationService
 	public void delete(Medication m)
 	{
 		md.delete(m);
+	}
+
+	public Medication getMedicationById(int id) 
+	{
+		for(Medication m : getAll())
+			if(m.getId() == id)
+				return m;
+		
+		return null;
 	}
 }

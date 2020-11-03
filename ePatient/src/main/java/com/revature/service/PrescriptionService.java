@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.dao.AppointmentDAOImpl;
 import com.revature.dao.PrescriptionDAO;
-import com.revature.dao.PrescriptionDAOImpl;
 import com.revature.model.Medication;
 import com.revature.model.Person;
 import com.revature.model.Prescription;
