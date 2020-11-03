@@ -20,33 +20,31 @@ import com.revature.service.MedicationService;
 @RestController("medicationController")
 @RequestMapping("/medication")
 @CrossOrigin
-public class MedicationController 
-{
+public class MedicationController {
 	private MedicationService ms;
-	
+
 	@Autowired
-	public void setMedicationService(MedicationService ms)
-	{
-		 this.ms = ms;
+	public void setMedicationService(MedicationService ms) {
+		this.ms = ms;
 	}
-	
-	
-	@PostMapping(value="/add", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public void addMedication(@RequestBody Medication m)
-	{
+
+	@PostMapping(value = "/add", consumes = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public void addMedication(@RequestBody Medication m) {
 		ms.add(m);
 	}
-	
-	@GetMapping(value="/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<Medication>> getAllMedications()
-	{
+
+	@GetMapping(value = "/all", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<List<Medication>> getAllMedications() {
 		return new ResponseEntity<List<Medication>>(this.ms.getAll(), HttpStatus.OK);
 	}
-	
-	
-	@GetMapping(value="/get/{id}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<Medication> getMedicationById(@PathVariable int id)
-	{
+
+	@PostMapping(value = "/update", consumes = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<Boolean> updateMedication(@RequestBody Medication m) {
+		return new ResponseEntity<Boolean>(this.ms.update(m), HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/get/{id}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<Medication> getMedicationById(@PathVariable int id) {
 		return new ResponseEntity<Medication>(this.ms.getMedicationById(id), HttpStatus.OK);
 	}
 }

@@ -39,9 +39,9 @@ public class MedicationService
 		md.add(m);
 	}
 	
-	public void update(Medication m)
+	public boolean update(Medication m)
 	{
-		md.update(m);
+		return md.update(m);
 	}
 	
 	public void delete(Medication m)
