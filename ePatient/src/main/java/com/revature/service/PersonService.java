@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.List;
+
 import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.commons.validator.routines.RegexValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,10 @@ public class PersonService {
 		} else {
 			return false;
 		}	
+	}
+	
+	public List<Person> getAllDoctors() {
+		return pdao.getAllDoctors();
 	}
 	
 	/**

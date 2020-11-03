@@ -1,5 +1,7 @@
 package com.revature.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +31,11 @@ public class PersonController {
 	@GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Person> getPerson(@PathVariable int id) {
 		return new ResponseEntity<Person>(ps.getPersonInfo(id), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/get_doctors", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<Person>> getAllDoctors() {
+		return new ResponseEntity<List<Person>>(ps.getAllDoctors(), HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
