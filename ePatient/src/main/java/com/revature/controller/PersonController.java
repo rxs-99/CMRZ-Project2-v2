@@ -38,6 +38,11 @@ public class PersonController {
 		return new ResponseEntity<List<Person>>(ps.getAllDoctors(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/get/patients", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<Person>> getAllPatients() {
+		return new ResponseEntity<List<Person>>(ps.getAllPatients(), HttpStatus.OK);
+	}
+	
 	@PostMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public void editPerson(@RequestBody Person newPerson) {
 		ps.updatePersonInfo(newPerson);

@@ -175,4 +175,24 @@ public class PersonDAOImpl implements PersonDAO {
 			sess.close();
 		}
 	}
+
+	@Override
+	public List<Person> getAllPatients() {
+		Session sess = HibernateSessionFactory.getSession();
+		Transaction tx = sess.beginTransaction();
+		
+		try {
+			Query<Person> q = sess.createQuery("SELECT p FROM Person AS p WHERE p.position.name = 'patient'", Person.class);
+			List<Person> patients = q.list();
+			
+			tx.commit();
+			return patients;
+		} catch(HibernateException he) {
+			tx.rollback();
+			return new ArrayList<Person>();
+		} finally {
+			sess.close();
+		}
+	
+	}
 }
