@@ -72,4 +72,9 @@ public class PersonService {
 			return false;
 		}
 	}
+
+	public List<Person> getAllPatients() 
+	{
+		return pdao.getAllPatients();
+	}
 }

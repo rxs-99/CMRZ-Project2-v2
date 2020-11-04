@@ -53,4 +53,10 @@ public interface PersonDAO {
 	 * @return A list of all doctors within the database.
 	 */
 	public List<Person> getAllDoctors();
+	
+	/**
+	 * Returns a list of all people classified as patients.
+	 * @return A list of all patients within the database.
+	 */
+	public List<Person> getAllPatients();
 }
