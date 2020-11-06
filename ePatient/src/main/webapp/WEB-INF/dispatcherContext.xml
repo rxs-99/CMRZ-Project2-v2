@@ -8,6 +8,16 @@
 
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<mvc:default-servlet-handler/>
-	<context:component-scan base-package="com.revature.controller"></context:component-scan>
+	<context:component-scan base-package="com.revature.controller;com.revature.web"></context:component-scan>
+
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/login/**"/>
+			<bean class="com.revature.web.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 
 </beans>

@@ -3,8 +3,10 @@ package com.revature.controller;
 import java.util.List;
 
 import javax.print.attribute.standard.Media;
+import javax.servlet.http.HttpSession;
 
 import com.revature.model.Appointment;
+import com.revature.model.Person;
 import com.revature.service.AppointmentService;
 
 import org.apache.commons.httpclient.HttpsURL;
