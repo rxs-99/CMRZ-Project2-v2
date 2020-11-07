@@ -13,22 +13,20 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JWTUtil {
 
 	private static final String HEADER = "Authorization";
-    private static final String PREFIX = "QXV0aG9yaXphdGlvblByZWZpeA== ";
+    private static final String PREFIX = "Bearer ";
 	private static final String SECRET = "nibR19FuoJuYst0iDt5BEVqJc6nZplPhEz3zsfin+t+60Delio/pMW8f38ZRRHt3C5UmhxLqRJ1fDeaUmof47g0YJ/sZCtlqX+rAbQ6MYrp5KvLdqIgBE9O4Eu5/FSmm3kYZE0kIzkZNehAAt9bDbfdNI8ZUVnPqgiPDjS4brqA=";
 	
 	public static String getJWTToken(String username, Person p) {
 		String token = Jwts.builder().setId(Integer.toString(p.getId())).setSubject(username)
 				.claim("role", p.getPosition().getName()).setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + 1800000))
+				.setExpiration(new Date(System.currentTimeMillis() + 300000))
 				.signWith(SignatureAlgorithm.HS512, SECRET.getBytes()).compact();
 
-		System.out.println(token);
-		return PREFIX + token;
+		return token;
 	}
 
 	public static boolean checkJWTToken(HttpServletRequest request) {
         String authenticationHeader = request.getHeader(HEADER);
-        System.out.println("checkJWToken");
         if(authenticationHeader == null || !authenticationHeader.startsWith(PREFIX)){
             return false;
         }
@@ -37,9 +35,6 @@ public class JWTUtil {
 
 	public static Claims validateToken(HttpServletRequest request){
         String jwtToken = request.getHeader(HEADER).replace(PREFIX, "");
-
-        System.out.println("validateToken");
-
         return Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwtToken).getBody();
 	}
 	
