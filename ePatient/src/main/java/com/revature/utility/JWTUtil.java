@@ -19,7 +19,7 @@ public class JWTUtil {
 	public static String getJWTToken(String username, Person p) {
 		String token = Jwts.builder().setId(Integer.toString(p.getId())).setSubject(username)
 				.claim("role", p.getPosition().getName()).setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + 300000))
+				.setExpiration(new Date(System.currentTimeMillis() + 1800000))
 				.signWith(SignatureAlgorithm.HS512, SECRET.getBytes()).compact();
 
 		return token;
