@@ -37,7 +37,7 @@ public class AppointmentServiceTest {
 
     @Test
     public void testAdd(){
-        Appointment a = new Appointment();
+        Appointment a = new Appointment(1, new Person(), new Person(), new Date(2135465), "lol", "help");
         Mockito.when(this.appointmentDAO.add(a)).thenReturn(true);
 
         Assert.assertTrue(appointmentService.add(a));
