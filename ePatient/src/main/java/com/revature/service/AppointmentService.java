@@ -5,6 +5,7 @@ import java.util.List;
 import com.revature.dao.AppointmentDAO;
 import com.revature.dao.AppointmentDAOImpl;
 import com.revature.model.Appointment;
+import com.revature.utility.ValidationHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,18 @@ public class AppointmentService {
     }
 
     public boolean add(Appointment appointment){
+    	if(new ValidationHelper().isValidAppointment(appointment) == false) {
+    		return false;
+    	}
+    	
         return this.appointmentDAO.add(appointment);
     }
 
     public boolean update(Appointment appointment){
+    	if(new ValidationHelper().isValidAppointment(appointment) == false) {
+    		return false;
+    	}
+    	
         return this.appointmentDAO.update(appointment);
     }
 
