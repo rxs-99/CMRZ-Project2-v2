@@ -29,8 +29,8 @@ public class MedicationController {
 	}
 
 	@PostMapping(value = "/add", consumes = { MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public void addMedication(@RequestBody Medication m) {
-		ms.add(m);
+	public ResponseEntity<Boolean> addMedication(@RequestBody Medication m) {
+		return new ResponseEntity<Boolean>(this.ms.add(m), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/all", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
